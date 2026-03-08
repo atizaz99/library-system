@@ -1,0 +1,3 @@
+"libraryVenv/"
+"*pyc"
+"db.sqlite3"
