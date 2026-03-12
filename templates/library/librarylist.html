@@ -1,0 +1,45 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Book Collection{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-bold">Library Catalog</h2>
+    <button class="btn btn-primary shadow-sm">+ Add New Book</button>
+</div>
+
+<div class="card shadow-sm p-3">
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td class="fw-semibold">{{ book.title }}</td>
+                    <td>{{ book.author.name }}</td>
+                    <td><code class="text-muted">{{ book.isbn }}</code></td>
+                    <td>
+                        <span class="badge rounded-pill bg-success">Available</span>
+                    </td>
+                    <td class="text-end">
+                        <button class="btn btn-sm btn-outline-secondary">View</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted py-4">No books found in the registry.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

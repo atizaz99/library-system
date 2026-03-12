@@ -1,0 +1,24 @@
+<nav id="sidebar" class="bg-dark shadow-lg">
+    <div class="p-4 border-bottom border-secondary text-center">
+        <h4 class="fw-bold mb-0">📚 MyLibrary</h4>
+    </div>
+    <ul class="nav flex-column p-2 mt-3">
+        <li class="nav-item mb-2">
+            <a href="/" class="nav-link text-white p-3 rounded hover-effect">
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item mb-2">
+            <a href="{% url 'books' %}" class="nav-link text-white p-3 rounded">
+                <i class="bi bi-book me-2"></i> Book Catalog
+            </a>
+        </li>
+        {% if user.is_librain %}
+        <li class="nav-item mb-2">
+            <a href="/admin/" class="nav-link text-warning p-3 rounded">
+                <i class="bi bi-shield-lock me-2"></i> Librarian Panel
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

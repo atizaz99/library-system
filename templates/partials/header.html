@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white px-4 py-3 border-bottom shadow-sm">
+    <div class="container-fluid">
+        <h5 class="mb-0 text-secondary">Welcome, {{ user.first_name }}</h5>
+        
+        <div class="dropdown ms-auto">
+            <a href="#" class="d-flex align-items-center text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="mdo" width="40" height="40" class="rounded-circle border border-2 border-primary me-2">
+                {% else %}
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-2" style="width:40px; height:40px;">
+                        {{ user.first_name|first }}
+                    </div>
+                {% endif %}
+                <span class="text-dark fw-medium">{{ user.email }}</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow border-0">
+                <li><a class="dropdown-item py-2" href="#">Profile Settings</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item py-2 text-danger" href="/logout/">Sign out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>

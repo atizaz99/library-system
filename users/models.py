@@ -1,8 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from core.models import BaseModel
+import os
 
-
+def user_profile_path(instance, filename):
+    return f'profiles/user_{instance.id}/filename'
 # Create your models here.
 #custom user manager
 class CustomeUserManger(BaseUserManager):
@@ -34,8 +36,13 @@ class User(AbstractUser, BaseModel):
     email = models.EmailField(verbose_name= 'Email Address', unique=True)
     first_name = models.CharField( verbose_name='First Name', max_length= 50)
     last_name = models.CharField(verbose_name= 'Last Name', max_length=150)
-    is_librain = models.BooleanField(default=False)
+    is_librarian = models.BooleanField(default=False)
     is_student = models.BooleanField(default=True)
+    profile_picture = models.ImageField(
+        upload_to=user_profile_path,
+        null=True,
+        blank=True
+    )
     objects = CustomeUserManger()
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name']

@@ -1,16 +1,22 @@
 from django.contrib import admin
 from .models import Author, Category, Book, IssuedRecord
+from django.contrib import admin
+from django.db.models import F, Case, When, Value, IntegerField, CharField, ExpressionWrapper, BooleanField
+from django.db.models.functions import Coalesce, ExtractDay
+from datetime import date
+from .models import IssuedRecord
+from django.db.models import F, Q, IntegerField, Count
+from django.db.models.functions import Coalesce
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_at', 'is_deleted')
     search_fields = ('name',)
 @admin.register(Category)
-class Category(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('name', )
     search_fields = ('name', )
-from django.db.models import F, Q, IntegerField, Count
-from django.db.models.functions import Coalesce
+
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
@@ -42,11 +48,7 @@ class BookAdmin(admin.ModelAdmin):
     def available_count(self, obj):
         return obj.calc_avalible
 
-from django.contrib import admin
-from django.db.models import F, Case, When, Value, IntegerField, CharField, ExpressionWrapper, BooleanField
-from django.db.models.functions import Coalesce, ExtractDay
-from datetime import date
-from .models import IssuedRecord
+
 
 @admin.register(IssuedRecord)
 class IssuedRecordAdmin(admin.ModelAdmin):
